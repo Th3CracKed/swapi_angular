@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { Film, Films } from 'src/app/models';
+import { map, startWith, takeUntil } from 'rxjs/operators';
+import { Film, SWAPIResponse } from 'src/app/models';
 import { FilmService } from 'src/app/services';
 
 @Component({
@@ -12,13 +13,17 @@ import { FilmService } from 'src/app/services';
 })
 export class FilmsListComponent implements OnInit, OnDestroy {
 
-  films: Films;
+  films: SWAPIResponse<Film>;
   isLoading = true;
 
   private onDestroy$ = new Subject<void>();
   constructor(private filmService: FilmService, private router: Router) { }
 
   ngOnInit(): void {
+    this.getAllFilms();
+  }
+
+  private getAllFilms() {
     this.filmService.getAllFilms()
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(films => {

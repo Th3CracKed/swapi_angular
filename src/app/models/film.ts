@@ -14,10 +14,3 @@ export interface Film {
     edited: Date;
     url: string;
 }
-
-export interface Films {
-    count: number;
-    next?: any;
-    previous?: any;
-    results: Film[];
-}

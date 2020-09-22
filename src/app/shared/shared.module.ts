@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { ExtractIdFromUrlPipe } from '../pipes';
 import { VarDirective } from '../directives';
 
@@ -14,6 +16,8 @@ import { VarDirective } from '../directives';
         RouterModule,
         MatProgressSpinnerModule,
         MatCardModule,
+        MatAutocompleteModule,
+        MatFormFieldModule,
         ExtractIdFromUrlPipe,
         VarDirective
     ]

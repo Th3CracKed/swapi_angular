@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { Film, Films } from '../models';
+import { Film, SWAPIResponse } from '../models';
 import { APP_ENV } from '../shared/app.config';
 
 @Injectable({
@@ -17,16 +17,18 @@ export class FilmService {
 
   /**
    * Get All films from SWAPI endpoint
+   * @throws Error if apiEndPoint is not defined
    */
-  getAllFilms(): Observable<Films> {
+  getAllFilms(): Observable<SWAPIResponse<Film>> {
     if (!this.apiEndpoint) {
       return throwError(`apiEndPoint is not defined = ${this.apiEndpoint}`);
     }
-    return this.httpClient.get<Films>(`${this.apiEndpoint}/films`);
+    return this.httpClient.get<SWAPIResponse<Film>>(`${this.apiEndpoint}/films`);
   }
 
   /**
    * Get a specific film by url id
+   * @throws Error if apiEndPoint is not defined or @param filmId is not defined
    */
   getFilm(filmId: string): Observable<Film> {
     if (!this.apiEndpoint || !filmId) {
