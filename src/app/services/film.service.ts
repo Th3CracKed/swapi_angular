@@ -35,12 +35,4 @@ export class FilmService {
     return this.httpClient.get<Film>(`${this.apiEndpoint}/films/${filmId}`);
   }
 
-  /**
-   * Extract the id from a film
-   */
-  getFilmId(film: Film): string {
-    const tokens = film?.url?.split('/');
-    return tokens ? tokens[tokens.length - 2] : undefined;
-  }
-
 }

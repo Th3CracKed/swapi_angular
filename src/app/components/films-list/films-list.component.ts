@@ -30,11 +30,6 @@ export class FilmsListComponent implements OnInit, OnDestroy {
       });
   }
 
-  goToDetail(film: Film) {
-    const filmId = this.filmService.getFilmId(film);
-    this.router.navigate(['films', filmId], { state: film });
-  }
-
   ngOnDestroy() {
     this.onDestroy$.next();
     this.onDestroy$.complete();

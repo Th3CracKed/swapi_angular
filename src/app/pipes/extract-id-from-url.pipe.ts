@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ExtractIdFromUrlPipe implements PipeTransform {
 
   transform(url: string): string {
-    const tokens = url.split('/');
-    return tokens[tokens.length - 2];
+    const tokens = url?.split('/');
+    return tokens ? tokens[tokens.length - 2] : undefined;
   }
 
 }
