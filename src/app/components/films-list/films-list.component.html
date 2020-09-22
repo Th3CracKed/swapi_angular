@@ -1,0 +1,13 @@
+<div *ngIf="!isLoading && films">
+    <mat-selection-list #filmsList [multiple]="false">
+        <mat-list-option *ngFor="let film of films?.results">
+            <a mat-list-item (click)="goToDetail(film)"><span>{{film?.title}}</span> </a>
+        </mat-list-option>
+    </mat-selection-list>
+</div>
+<!-- Loading Spinner -->
+<div class="loading_container" *ngIf="isLoading">
+    <mat-spinner diameter="256"></mat-spinner>
+</div>
+<!-- Error Message -->
+<div *ngIf="!isLoading && !films">Error Occurred check your internet connection</div>

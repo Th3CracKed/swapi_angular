@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './shared/core.module';
 import { ResourcesListModule } from './components/resources-list/resources-list.module';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { ResourcesListModule } from './components/resources-list/resources-list.
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
+    HttpClientModule,
     ResourcesListModule
   ],
   providers: [],
