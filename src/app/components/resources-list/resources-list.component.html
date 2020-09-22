@@ -1,0 +1,7 @@
+<h2>Choose a Starwars Resource</h2>
+
+<mat-selection-list #resourceList [multiple]="false">
+    <mat-list-option *ngFor="let resource of resources">
+        <a mat-list-item [routerLink]="resource.value"><span>{{resource?.display}}</span> </a>
+    </mat-list-option>
+</mat-selection-list>

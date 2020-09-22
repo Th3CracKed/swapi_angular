@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ResourcesListModule } from './resources-list/resources-list.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from './shared/core.module';
+import { ResourcesListModule } from './components/resources-list/resources-list.module';
 
 @NgModule({
   declarations: [
@@ -12,6 +14,8 @@ import { ResourcesListModule } from './resources-list/resources-list.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    CoreModule,
     ResourcesListModule
   ],
   providers: [],
