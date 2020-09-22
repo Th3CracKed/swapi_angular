@@ -6,6 +6,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { ExtractIdFromUrlPipe } from '../pipes';
 import { VarDirective } from '../directives';
 
@@ -18,6 +21,9 @@ import { VarDirective } from '../directives';
         MatCardModule,
         MatAutocompleteModule,
         MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        MatButtonModule,
         ExtractIdFromUrlPipe,
         VarDirective
     ]

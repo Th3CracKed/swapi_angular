@@ -1,3 +1,27 @@
+<form class="form_container">
+    <mat-form-field>
+        <mat-label>Search by film title</mat-label>
+        <mat-spinner *ngIf="searchLoading" matPrefix diameter="16"></mat-spinner>
+        <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="searchControl"
+            [matAutocomplete]="auto">
+        <button mat-button *ngIf="searchControl?.value" matSuffix mat-icon-button aria-label="Clear"
+            (click)="searchControl.reset()">
+            <mat-icon>close</mat-icon>
+        </button>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <ng-container *ngFor="let searchedFilm of searchedFilms?.results">
+                <mat-option *appVar="searchedFilm?.url | extractIdFromUrl; let filmId" [routerLink]="['.', filmId]">
+                    {{searchedFilm?.title}}
+                </mat-option>
+            </ng-container>
+        </mat-autocomplete>
+        <mat-hint *ngIf="!searchedFilms?.results.length && !searchControl?.value">Make a Search</mat-hint>
+        <mat-hint *ngIf="!searchedFilms?.results.length && searchControl?.value">No Results Found
+        </mat-hint>
+    </mat-form-field>
+</form>
+
+
 <div *ngIf="!isLoading && films">
     <mat-selection-list #filmsList [multiple]="false">
         <mat-list-option *ngFor="let film of films?.results">

@@ -37,4 +37,11 @@ export class FilmService {
     return this.httpClient.get<Film>(`${this.apiEndpoint}/films/${filmId}`);
   }
 
+  search(searchedValue: string): Observable<SWAPIResponse<Film>> {
+    if (!this.apiEndpoint || !searchedValue) {
+      return throwError(`A param is not defined apiEndPoint = ${this.apiEndpoint} searchedValue = ${searchedValue}`);
+    }
+    return this.httpClient.get<SWAPIResponse<Film>>(`${this.apiEndpoint}/films/?search=${searchedValue}`);
+  }
+
 }
