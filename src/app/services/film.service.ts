@@ -15,7 +15,9 @@ export class FilmService {
     this.apiEndpoint = env.apiEndpoint;
   }
 
-
+  /**
+   * Get All films from SWAPI endpoint
+   */
   getAllFilms(): Observable<Films> {
     if (!this.apiEndpoint) {
       return throwError(`apiEndPoint is not defined = ${this.apiEndpoint}`);
@@ -23,9 +25,22 @@ export class FilmService {
     return this.httpClient.get<Films>(`${this.apiEndpoint}/films`);
   }
 
+  /**
+   * Get a specific film by url id
+   */
+  getFilm(filmId: string): Observable<Film> {
+    if (!this.apiEndpoint || !filmId) {
+      return throwError(`A param is not defined apiEndPoint = ${this.apiEndpoint} filmId = ${filmId}`);
+    }
+    return this.httpClient.get<Film>(`${this.apiEndpoint}/films/${filmId}`);
+  }
+
+  /**
+   * Extract the id from a film
+   */
   getFilmId(film: Film): string {
-    const tokens = film.url.split('/');
-    return tokens[tokens.length - 2];
+    const tokens = film?.url?.split('/');
+    return tokens ? tokens[tokens.length - 2] : undefined;
   }
 
 }

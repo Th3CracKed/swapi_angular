@@ -3,8 +3,19 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
+import { ExtractIdFromUrlPipe } from '../pipes';
+import { VarDirective } from '../directives';
 
 @NgModule({
-    exports: [MatListModule, CommonModule, RouterModule, MatProgressSpinnerModule]
+    declarations: [ExtractIdFromUrlPipe, VarDirective],
+    exports: [MatListModule,
+        CommonModule,
+        RouterModule,
+        MatProgressSpinnerModule,
+        MatCardModule,
+        ExtractIdFromUrlPipe,
+        VarDirective
+    ]
 })
 export class SharedModule { }

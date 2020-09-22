@@ -1,0 +1,13 @@
+tr > td:first-child {
+    padding-right: 100px;
+}
+
+.resources{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.resource{
+    padding-right: 50px;
+}
