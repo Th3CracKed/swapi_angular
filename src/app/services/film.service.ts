@@ -19,11 +19,12 @@ export class FilmService {
    * Get All films from SWAPI endpoint
    * @throws Error if apiEndPoint is not defined
    */
-  getAllFilms(): Observable<SWAPIResponse<Film>> {
+  getAllFilms(page?: number): Observable<SWAPIResponse<Film>> {
     if (!this.apiEndpoint) {
       return throwError(`apiEndPoint is not defined = ${this.apiEndpoint}`);
     }
-    return this.httpClient.get<SWAPIResponse<Film>>(`${this.apiEndpoint}/films`);
+    const pagination = page ? `?page=${page}` : '';
+    return this.httpClient.get<SWAPIResponse<Film>>(`${this.apiEndpoint}/films/${pagination}`);
   }
 
   /**

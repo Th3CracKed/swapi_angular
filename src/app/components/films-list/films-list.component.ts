@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EMPTY, Observable, of, Subject } from 'rxjs';
-import { first, map, startWith, switchMap, takeUntil, mergeMap, distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { startWith, switchMap, takeUntil, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { Film, SWAPIResponse } from 'src/app/models';
 import { FilmService } from 'src/app/services';
 
@@ -26,8 +26,23 @@ export class FilmsListComponent implements OnInit, OnDestroy {
     this.setupSearch();
   }
 
-  private getAllFilms() {
-    this.filmService.getAllFilms()
+  getNextFilms() {
+    if (this.films?.next) {
+      const page = this.films?.next?.split('?')[1];
+      if (page) { this.getAllFilms(page); }
+    }
+  }
+
+  getPreviousFilms() {
+    if (this.films?.previous) {
+      const page = this.films?.previous?.split('?')[1];
+      if (page) { this.getAllFilms(page); }
+    }
+  }
+
+
+  private getAllFilms(page?: number) {
+    this.filmService.getAllFilms(page)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(films => {
         this.films = films;
@@ -59,7 +74,6 @@ export class FilmsListComponent implements OnInit, OnDestroy {
 
   private search(value: string): Observable<SWAPIResponse<Film>> {
     const searchedValue = value.trim().toLowerCase(); // SWAPI is case insensitive but it's safer like this
-
     return this.filmService.search(searchedValue);
   }
 

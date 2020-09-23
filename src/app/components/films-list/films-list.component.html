@@ -30,6 +30,12 @@
         </mat-list-option>
     </mat-selection-list>
 </div>
+<button mat-raised-button *ngIf="films?.previous" (click)="getPreviousFilms()">
+    Previous <mat-icon>navigate_before</mat-icon>
+</button>
+<button mat-raised-button *ngIf="films?.next" (click)="getNextFilms()">
+    Next<mat-icon>navigate_next</mat-icon>
+</button>
 <!-- Loading Spinner -->
 <div class=" loading_container" *ngIf="isLoading">
     <mat-spinner diameter="256"></mat-spinner>
