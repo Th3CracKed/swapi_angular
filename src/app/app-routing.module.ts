@@ -7,6 +7,10 @@ import { PeopleListComponent } from './components/people-list/people-list.compon
 import { PeopleDetailComponent } from './components/people-detail/people-detail.component';
 import { PlanetsListComponent } from './components/planets-list/planets-list.component';
 import { PlanetDetailComponent } from './components/planet-detail/planet-detail.component';
+import { SpeciesDetailComponent } from './components/species-detail/species-detail.component';
+import { SpeciesListComponent } from './components/species-list/species-list.component';
+import { VehiclesListComponent } from './components/vehicles-list/vehicles-list.component';
+import { VehiclesDetailComponent } from './components/vehicles-detail/vehicles-detail.component';
 
 const routes: Routes = [
   { path: '', component: ResourcesListComponent },
@@ -53,12 +57,25 @@ const routes: Routes = [
     path: 'species',
     children: [
       {
-        path: '', component: PlanetsListComponent,
+        path: '', component: SpeciesListComponent,
         loadChildren: () => import('./components/species-list/species-list.module').then(m => m.SpeciesListModule)
       },
       {
-        path: ':id', component: PlanetDetailComponent,
+        path: ':id', component: SpeciesDetailComponent,
         loadChildren: () => import('./components/species-detail/species-detail.module').then(m => m.SpeciesDetailModule)
+      }
+    ]
+  },
+  {
+    path: 'vehicles',
+    children: [
+      {
+        path: '', component: VehiclesListComponent,
+        loadChildren: () => import('./components/vehicles-list/vehicles-list.module').then(m => m.VehiclesListModule)
+      },
+      {
+        path: ':id', component: VehiclesDetailComponent,
+        loadChildren: () => import('./components/vehicles-detail/vehicles-detail.module').then(m => m.VehiclesDetailModule)
       }
     ]
   }

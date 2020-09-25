@@ -1,0 +1,80 @@
+<div *ngIf="!isLoading && vehicles">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ vehicles?.name}}</mat-card-title>
+            <mat-card-subtitle>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Model :</td>
+                            <td>{{ vehicles?.model}}</td>
+                        </tr>
+                        <tr>
+                            <td>Manufacturer :</td>
+                            <td>{{ vehicles?.manufacturer}}</td>
+                        </tr>
+                        <tr>
+                            <td>Cost in Credits :</td>
+                            <td>{{ vehicles?.cost_in_credits}}</td>
+                        </tr>
+                        <tr>
+                            <td>Length :</td>
+                            <td>{{ vehicles?.length}}</td>
+                        </tr>
+                        <tr>
+                            <td>Max atmosphering speed :</td>
+                            <td>{{ vehicles?.max_atmosphering_speed}}</td>
+                        </tr>
+                        <tr>
+                            <td>Crew :</td>
+                            <td>{{ vehicles?.crew}}</td>
+                        </tr>
+                        <tr>
+                            <td>Passengers :</td>
+                            <td>{{ vehicles?.passengers}}</td>
+                        </tr>
+                        <tr>
+                            <td>Cargo capacity :</td>
+                            <td>{{ vehicles?.cargo_capacity}}</td>
+                        </tr>
+                        <tr>
+                            <td>Consumables :</td>
+                            <td>{{ vehicles?.consumables}}</td>
+                        </tr>
+                        <tr>
+                            <td>Vehicule class :</td>
+                            <td>{{ vehicles?.vehicle_class}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+</div>
+
+<ng-container *ngIf="vehicles?.pilots?.length">
+    <h2 class="title">Pilots :</h2>
+    <ul class="resources">
+        <li class="resource" *ngFor="let pilots of vehicles?.pilots">
+            <a mat-stroked-button *appVar="pilots | extractIdFromUrl; let pilotsId"
+                [routerLink]="['/characters',pilotsId]">
+                Pilots Nº {{pilotsId }}</a>
+        </li>
+    </ul>
+</ng-container>
+<ng-container *ngIf="vehicles?.films?.length">
+    <h2 class="title">Films :</h2>
+    <ul class="resources">
+        <li class="resource" *ngFor="let film of vehicles?.films">
+            <a mat-stroked-button *appVar="film | extractIdFromUrl; let filmId" [routerLink]="['/films',filmId]">
+                Film Nº {{filmId }}</a>
+        </li>
+    </ul>
+</ng-container>
+
+<!-- Loading Spinner -->
+<div class="loading_container" *ngIf="isLoading">
+    <mat-spinner diameter="256"></mat-spinner>
+</div>
+<!-- Error Message -->
+<div *ngIf="!isLoading && !vehicles">Error Occurred check your internet connection</div>
