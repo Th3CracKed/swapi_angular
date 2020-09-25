@@ -11,7 +11,7 @@ Normally, npm will be installed with Node.js , but it's recommended to get the l
 
 ### Node.js LTS Installation
 
-The installation of node.js differ from distribution to an other, I will cover in this document the installation of Node.js on Ubuntu you can find who to install Node.js in your distribution by simple google search.
+The installation of node.js differ from distribution to another, I will cover in this document the installation of Node.js on Ubuntu you can find who to install Node.js in your distribution by simple google search.
 
   
 
@@ -52,14 +52,14 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Features
 
- **Optimized search bar :** The search bar is enhanced to send a request only when user stopped typing for 0.2 seconds which help reduce the number of requests by a lot, but still give a good user experience.
+ **Optimized search bar :** The search bar is enhanced to send a request only when user stopped typing for 0.2 seconds, which help reduce the number of requests by a lot, but still give a good user experience.
 The request are sent only when a new data is typed (if the user stop typing and the input text has the same value as previous request the request is not sent to the API )  
 
-**Http Pagination :** SWAPI support pagination via http which this project implement.
+**Http Pagination :** SWAPI support pagination via http which this project implements.
 
-**Reuse old state :** The detail pages reuse the request from list resources, if user navigated from it else it request from the api.
+**Reuse old state :** The detail pages reuses the request from list resources, if user navigated from it otherwise it request the data from the api.
 
-**Lazy loading :** Component are loaded when user navigate to the page, which help reduce the initial loading speed.
+**Lazy loading :** Eeach Component is loaded when the user navigates to the page, which help reduce the initial loading speed.
 
 ## Used Frameworks
 
