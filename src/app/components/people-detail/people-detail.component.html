@@ -1,0 +1,92 @@
+<div *ngIf="!isLoading && people">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ people?.name}}</mat-card-title>
+            <mat-card-subtitle>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Height :</td>
+                            <td>{{ people?.height}}</td>
+                        </tr>
+                        <tr>
+                            <td>Mass :</td>
+                            <td>{{ people?.mass}}</td>
+                        </tr>
+                        <tr>
+                            <td>Hair Color :</td>
+                            <td>{{ people?.hair_color}}</td>
+                        </tr>
+                        <tr>
+                            <td>Skin Color :</td>
+                            <td>{{ people?.skin_color}}</td>
+                        </tr>
+                        <tr>
+                            <td>Eye Color :</td>
+                            <td>{{ people?.eye_color}}</td>
+                        </tr>
+                        <tr>
+                            <td>Birth year :</td>
+                            <td>{{ people?.birth_year}}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender :</td>
+                            <td>{{ people?.gender}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <a mat-stroked-button *appVar="people?.homeworld | extractIdFromUrl; let homeworld"
+                [routerLink]="['/planets',homeworld]">Homeworld</a>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<ng-container *ngIf="people?.films?.length">
+    <h2 class="title">Films :</h2>
+    <ul class="resources">
+        <li class="resource" *ngFor="let film of people?.films">
+            <a mat-stroked-button *appVar="film | extractIdFromUrl; let filmId" [routerLink]="['/films',filmId]">
+                Film Nº {{filmId }}</a>
+        </li>
+    </ul>
+</ng-container>
+<ng-container *ngIf="people?.starships?.length">
+    <h2 class="title">Starships :</h2>
+    <ul class="resources">
+        <li class="resource" *ngFor="let starship of people?.starships">
+            <a mat-stroked-button *appVar="starship | extractIdFromUrl; let starshipId"
+                [routerLink]="['/starships',starshipId]">
+                Starship Nº {{starshipId }}</a>
+        </li>
+    </ul>
+</ng-container>
+<ng-container *ngIf="people?.vehicles?.length">
+    <h2 class="title">Vehicles :</h2>
+    <ul class="resources">
+        <li class="resource" *ngFor="let vehicle of people?.vehicles">
+            <a mat-stroked-button *appVar="vehicle | extractIdFromUrl; let vehicleId"
+                [routerLink]="['/vehicles',vehicleId]">
+                Vehicle Nº {{vehicleId }}</a>
+        </li>
+    </ul>
+</ng-container>
+<ng-container *ngIf="people?.species?.length">
+    <h2 class="title">Species :</h2>
+    <ul class="resources">
+        <li class="resource" *ngFor="let specie of people?.species">
+            <a mat-stroked-button *appVar="specie | extractIdFromUrl; let specieId"
+                [routerLink]="['/species',specieId]">
+                Specie Nº {{specieId }}</a>
+        </li>
+    </ul>
+</ng-container>
+
+<!-- Loading Spinner -->
+<div class="loading_container" *ngIf="isLoading">
+    <mat-spinner diameter="256"></mat-spinner>
+</div>
+<!-- Error Message -->
+<div *ngIf="!isLoading && !people">Error Occurred check your internet connection</div>

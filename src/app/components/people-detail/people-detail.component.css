@@ -1,0 +1,14 @@
+tr > td:first-child {
+    padding-right: 100px;
+}
+
+.resources{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style-type: none;
+}
+
+.resource{
+    padding: 0px 50px 50px 0px;
+}

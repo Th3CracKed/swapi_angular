@@ -27,7 +27,7 @@
     </mat-card>
 </div>
 
-<ng-container *ngIf="film?.characters">
+<ng-container *ngIf="film?.characters?.length">
     <h2 class="title">Characters :</h2>
     <ul class="resources">
         <li class="resource" *ngFor="let character of film?.characters">
@@ -37,7 +37,7 @@
         </li>
     </ul>
 </ng-container>
-<ng-container *ngIf="film?.planets">
+<ng-container *ngIf="film?.planets?.length">
     <h2 class="title">Planets :</h2>
     <ul class="resources">
         <li class="resource" *ngFor="let planet of film?.planets">
@@ -47,7 +47,7 @@
         </li>
     </ul>
 </ng-container>
-<ng-container *ngIf="film?.starships">
+<ng-container *ngIf="film?.starships?.length">
     <h2 class="title">Starships :</h2>
     <ul class="resources">
         <li class="resource" *ngFor="let starship of film?.starships">
@@ -57,7 +57,7 @@
         </li>
     </ul>
 </ng-container>
-<ng-container *ngIf="film?.vehicles">
+<ng-container *ngIf="film?.vehicles?.length">
     <h2 class="title">Vehicles :</h2>
     <ul class="resources">
         <li class="resource" *ngFor="let vehicle of film?.vehicles">
@@ -67,7 +67,7 @@
         </li>
     </ul>
 </ng-container>
-<ng-container *ngIf="film?.species">
+<ng-container *ngIf="film?.species?.length">
     <h2 class="title">Species :</h2>
     <ul class="resources">
         <li class="resource" *ngFor="let specie of film?.species">

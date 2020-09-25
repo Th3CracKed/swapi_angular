@@ -2,49 +2,49 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, of, Subject } from 'rxjs';
 import { startWith, switchMap, takeUntil, distinctUntilChanged, debounceTime } from 'rxjs/operators';
-import { Film, SWAPIResponse } from 'src/app/models';
-import { FilmService } from 'src/app/services';
+import { People, SWAPIResponse } from 'src/app/models';
+import { PeopleService } from 'src/app/services';
 
 @Component({
-  selector: 'app-films-list',
-  templateUrl: './films-list.component.html',
-  styleUrls: ['./films-list.component.css']
+  selector: 'app-peoples-list',
+  templateUrl: './people-list.component.html',
+  styleUrls: ['./people-list.component.css']
 })
-export class FilmsListComponent implements OnInit, OnDestroy {
+export class PeopleListComponent implements OnInit, OnDestroy {
 
   searchControl = new FormControl();
   searchLoading = false;
-  searchedFilms: SWAPIResponse<Film>;
-  films: SWAPIResponse<Film>;
+  searchedCharacters: SWAPIResponse<People>;
+  characters: SWAPIResponse<People>;
   isLoading = true;
   private onDestroy$ = new Subject<void>();
-  constructor(private filmService: FilmService) { }
+  constructor(private peopleService: PeopleService) { }
 
   ngOnInit(): void {
-    this.getAllFilms();
+    this.getAllCharacters();
     this.setupSearch();
   }
 
-  getNextFilms() {
-    if (this.films?.next) {
-      const page = this.films?.next?.split('?page=')[1];
-      if (page) { this.getAllFilms(page); }
+  getNextCharacters() {
+    if (this.characters?.next) {
+      const page = this.characters?.next?.split('?page=')[1];
+      if (page) { this.getAllCharacters(page); }
     }
   }
 
-  getPreviousFilms() {
-    if (this.films?.previous) {
-      const page = this.films?.previous?.split('?page=')[1];
-      if (page) { this.getAllFilms(page); }
+  getPreviousCharacters() {
+    if (this.characters?.previous) {
+      const page = this.characters?.previous?.split('?page=')[1];
+      if (page) { this.getAllCharacters(page); }
     }
   }
 
 
-  private getAllFilms(page?: number) {
-    this.filmService.getAllFilms(page)
+  private getAllCharacters(page?: number) {
+    this.peopleService.getAllCharacters(page)
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(films => {
-        this.films = films;
+      .subscribe(peoples => {
+        this.characters = peoples;
         this.isLoading = false;
       }, err => {
         this.isLoading = false;
@@ -59,11 +59,11 @@ export class FilmsListComponent implements OnInit, OnDestroy {
       debounceTime(200), // Discard emitted values that take less than the specified time between output
       switchMap(value => { // switchMap switch to a new observable when new Request is done
         this.searchLoading = true;
-        return value ? this.search(value) : of({ results: [] } as SWAPIResponse<Film>);
+        return value ? this.search(value) : of({ results: [] } as SWAPIResponse<People>);
       }),
       takeUntil(this.onDestroy$)
-    ).subscribe(searchedFilms => {
-      this.searchedFilms = searchedFilms;
+    ).subscribe(searchedCharacters => {
+      this.searchedCharacters = searchedCharacters;
       this.searchLoading = false;
     }, err => {
       console.error(err);
@@ -71,9 +71,9 @@ export class FilmsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  private search(value: string): Observable<SWAPIResponse<Film>> {
+  private search(value: string): Observable<SWAPIResponse<People>> {
     const searchedValue = value.trim().toLowerCase(); // SWAPI is case insensitive but it's safer like this
-    return this.filmService.search(searchedValue);
+    return this.peopleService.search(searchedValue);
   }
 
   ngOnDestroy() {
