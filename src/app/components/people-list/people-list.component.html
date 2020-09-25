@@ -1,0 +1,45 @@
+<form class="form_container">
+    <mat-form-field>
+        <mat-label>Search by character Name</mat-label>
+        <mat-spinner *ngIf="searchLoading" matPrefix diameter="16"></mat-spinner>
+        <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="searchControl"
+            [matAutocomplete]="auto">
+        <button mat-button *ngIf="searchControl?.value" matSuffix mat-icon-button aria-label="Clear"
+            (click)="searchControl.reset()">
+            <mat-icon>close</mat-icon>
+        </button>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <ng-container *ngFor="let searchedCharacter of searchedCharacters?.results">
+                <mat-option *appVar="searchedCharacter?.url | extractIdFromUrl; let filmId"
+                    [routerLink]="['.', filmId]">
+                    {{searchedCharacter?.name}}
+                </mat-option>
+            </ng-container>
+        </mat-autocomplete>
+        <mat-hint *ngIf="!searchedCharacters?.results.length && !searchControl?.value">Make a Search</mat-hint>
+        <mat-hint *ngIf="!searchedCharacters?.results.length && searchControl?.value">No Results Found
+        </mat-hint>
+    </mat-form-field>
+</form>
+
+
+<div *ngIf="!isLoading && characters">
+    <mat-selection-list #charactersList [multiple]="false">
+        <mat-list-option *ngFor="let character of characters?.results">
+            <a mat-list-item *appVar="character?.url | extractIdFromUrl; let characterId"
+                [routerLink]="['.', characterId]"><span>{{character?.name}}</span> </a>
+        </mat-list-option>
+    </mat-selection-list>
+</div>
+<button mat-raised-button *ngIf="characters?.previous" (click)="getPreviousCharacters()">
+    Previous <mat-icon>navigate_before</mat-icon>
+</button>
+<button mat-raised-button *ngIf="characters?.next" (click)="getNextCharacters()">
+    Next<mat-icon>navigate_next</mat-icon>
+</button>
+<!-- Loading Spinner -->
+<div class=" loading_container" *ngIf="isLoading">
+    <mat-spinner diameter="256"></mat-spinner>
+</div>
+<!-- Error Message -->
+<div *ngIf="!isLoading && !characters">Error Occurred check your internet connection</div>

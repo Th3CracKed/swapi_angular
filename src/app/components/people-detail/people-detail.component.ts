@@ -1,30 +1,30 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
-import { Film } from 'src/app/models';
-import { FilmService } from 'src/app/services';
+import { People } from 'src/app/models';
+import { PeopleService } from 'src/app/services';
 import * as R from 'ramda';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-film-detail',
-  templateUrl: './film-detail.component.html',
-  styleUrls: ['./film-detail.component.css']
+  selector: 'app-people-detail',
+  templateUrl: './people-detail.component.html',
+  styleUrls: ['./people-detail.component.css']
 })
-export class FilmDetailComponent implements OnInit, OnDestroy {
+export class PeopleDetailComponent implements OnInit, OnDestroy {
 
   isLoading = true;
-  film: Film;
+  people: People;
 
   private onDestroy$ = new Subject<void>();
 
-  constructor(private filmService: FilmService, private route: ActivatedRoute) {
+  constructor(private peopleService: PeopleService, private route: ActivatedRoute) {
     const { navigationId, ...oldState } = history.state;
     if (!R.isEmpty(oldState)) {
-      this.film = oldState;
+      this.people = oldState;
       this.isLoading = false;
     } else {
-      this.requestFilmDetail();
+      this.requestPeopleDetail();
     }
   }
 
@@ -35,15 +35,15 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     this.onDestroy$.complete();
   }
 
-  private requestFilmDetail() {
+  private requestPeopleDetail() {
     this.route.params
       .pipe(first())
       .subscribe(param => {
-        const filmId = param?.id;
-        this.filmService.getFilm(filmId)
+        const peopleId = param?.id;
+        this.peopleService.getPeople(peopleId)
           .pipe(takeUntil(this.onDestroy$))
-          .subscribe(film => {
-            this.film = film;
+          .subscribe(people => {
+            this.people = people;
             this.isLoading = false;
           }, err => {
             console.error(err);

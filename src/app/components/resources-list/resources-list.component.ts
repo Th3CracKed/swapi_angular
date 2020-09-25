@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ResourcesListComponent implements OnInit {
   resources = [
     { display: 'Films', value: 'films' },
-    { display: 'People', value: 'people' },
+    { display: 'People', value: 'characters' },
     { display: 'Planets', value: 'planets' },
     { display: 'Species', value: 'species' },
     { display: 'Vehicles', value: 'vehicles' },
