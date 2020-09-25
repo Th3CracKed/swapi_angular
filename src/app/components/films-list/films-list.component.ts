@@ -12,6 +12,7 @@ import { FilmService } from 'src/app/services';
 })
 export class FilmsListComponent implements OnInit, OnDestroy {
 
+  paginationLoading = false;
   searchControl = new FormControl();
   searchLoading = false;
   searchedFilms: SWAPIResponse<Film>;
@@ -21,33 +22,35 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   constructor(private filmService: FilmService) { }
 
   ngOnInit(): void {
-    this.getAllFilms();
+    this.getAllFilms(() => this.isLoading = false);
     this.setupSearch();
   }
 
   getNextFilms() {
+    this.paginationLoading = true;
     if (this.films?.next) {
       const page = this.films?.next?.split('?page=')[1];
-      if (page) { this.getAllFilms(page); }
+      if (page) { this.getAllFilms(() => this.paginationLoading = false, page); }
     }
   }
 
   getPreviousFilms() {
+    this.paginationLoading = true;
     if (this.films?.previous) {
       const page = this.films?.previous?.split('?page=')[1];
-      if (page) { this.getAllFilms(page); }
+      if (page) { this.getAllFilms(() => this.paginationLoading = false, page); }
     }
   }
 
 
-  private getAllFilms(page?: number) {
+  private getAllFilms(onEndCallback: () => void, page?: number) {
     this.filmService.getAllFilms(page)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(films => {
         this.films = films;
-        this.isLoading = false;
+        onEndCallback();
       }, err => {
-        this.isLoading = false;
+        onEndCallback();
         console.error(err);
       });
   }

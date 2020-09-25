@@ -31,14 +31,15 @@
         </mat-list-option>
     </mat-selection-list>
 </div>
-<ng-container *ngIf="characters?.previous || characters?.next">
+<div class="pagination_container" *ngIf="characters?.previous || characters?.next">
     <button mat-raised-button [disabled]="!characters?.previous" (click)="getPreviousCharacters()">
         Previous <mat-icon>navigate_before</mat-icon>
     </button>
     <button mat-raised-button [disabled]="!characters?.next" (click)="getNextCharacters()">
         Next<mat-icon>navigate_next</mat-icon>
     </button>
-</ng-container>
+    <mat-spinner *ngIf="paginationLoading" matPrefix diameter="32"></mat-spinner>
+</div>
 <!-- Loading Spinner -->
 <div class=" loading_container" *ngIf="isLoading">
     <mat-spinner diameter="256"></mat-spinner>
