@@ -1,0 +1,48 @@
+<form class="form_container">
+    <mat-form-field>
+        <mat-label>Search by species title</mat-label>
+        <mat-spinner *ngIf="searchLoading" matPrefix diameter="16"></mat-spinner>
+        <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="searchControl"
+            [matAutocomplete]="auto">
+        <button mat-button *ngIf="searchControl?.value" matSuffix mat-icon-button aria-label="Clear"
+            (click)="searchControl.reset()">
+            <mat-icon>close</mat-icon>
+        </button>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <ng-container *ngFor="let oneSearchedSpecies of searchedSpecies?.results">
+                <mat-option *appVar="oneSearchedSpecies?.url | extractIdFromUrl; let speciesId"
+                    [routerLink]="['.', speciesId]">
+                    {{oneSearchedSpecies?.name}}
+                </mat-option>
+            </ng-container>
+        </mat-autocomplete>
+        <mat-hint *ngIf="!searchedSpecies?.results.length && !searchControl?.value">Make a Search</mat-hint>
+        <mat-hint *ngIf="!searchedSpecies?.results.length && searchControl?.value">No Results Found
+        </mat-hint>
+    </mat-form-field>
+</form>
+
+
+<div *ngIf="!isLoading && species">
+    <mat-selection-list #speciesList [multiple]="false">
+        <mat-list-option *ngFor="let oneSpecies of species?.results">
+            <a mat-list-item *appVar="oneSpecies?.url | extractIdFromUrl; let speciesId"
+                [routerLink]="['.', speciesId]"><span>{{oneSpecies?.name}}</span> </a>
+        </mat-list-option>
+    </mat-selection-list>
+</div>
+<div class="pagination_container" *ngIf="species?.previous || species?.next">
+    <button mat-raised-button [disabled]="!species?.previous" (click)="getPreviousSpecies()">
+        Previous <mat-icon>navigate_before</mat-icon>
+    </button>
+    <button mat-raised-button [disabled]="!species?.next" (click)="getNextSpecies()">
+        Next<mat-icon>navigate_next</mat-icon>
+    </button>
+    <mat-spinner *ngIf="paginationLoading" matPrefix diameter="32"></mat-spinner>
+</div>
+<!-- Loading Spinner -->
+<div class=" loading_container" *ngIf="isLoading">
+    <mat-spinner diameter="256"></mat-spinner>
+</div>
+<!-- Error Message -->
+<div *ngIf="!isLoading && !species">Error Occurred check your internet connection</div>

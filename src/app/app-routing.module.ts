@@ -48,6 +48,19 @@ const routes: Routes = [
         loadChildren: () => import('./components/planet-detail/planet-detail.module').then(m => m.PlanetDetailModule)
       }
     ]
+  },
+  {
+    path: 'species',
+    children: [
+      {
+        path: '', component: PlanetsListComponent,
+        loadChildren: () => import('./components/species-list/species-list.module').then(m => m.SpeciesListModule)
+      },
+      {
+        path: ':id', component: PlanetDetailComponent,
+        loadChildren: () => import('./components/species-detail/species-detail.module').then(m => m.SpeciesDetailModule)
+      }
+    ]
   }
 ];
 
