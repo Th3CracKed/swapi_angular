@@ -9,14 +9,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { ExtractIdFromUrlPipe } from '../pipes';
 import { VarDirective } from '../directives';
 
 @NgModule({
     declarations: [ExtractIdFromUrlPipe, VarDirective],
-    exports: [MatListModule,
+    exports: [
         CommonModule,
         RouterModule,
+        MatListModule,
         MatProgressSpinnerModule,
         MatCardModule,
         MatAutocompleteModule,
@@ -24,6 +27,8 @@ import { VarDirective } from '../directives';
         MatInputModule,
         MatIconModule,
         MatButtonModule,
+        MatToolbarModule,
+        MatSidenavModule,
         ExtractIdFromUrlPipe,
         VarDirective
     ]
