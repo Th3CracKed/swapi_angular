@@ -1,14 +1,42 @@
 # Swapi
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3.
+  
+## Project Setup
 
-## Development server
+To run this project in Linux machine, you will need Node.js LTS along with npm and Angular.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Normally, npm will be installed with Node.js , but it's recommended to get the last version.
 
-## Code scaffolding
+  
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Node.js LTS Installation
+
+The installation of node.js differ from distribution to an other, I will cover in this document the installation of Node.js on Ubuntu you can find who to install Node.js in your distribution by simple google search.
+
+  
+
+Copy and paste theses commands in your terminal :
+
+    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+    
+    sudo apt-get install -y nodejs
+
+  - The first line use curl to execute a script that install a Node.js 12.x repo onto a Debian or Ubuntu system.
+  - The second line install Node.js on the current machine.
+  
+### Update NPM
+After Installing Node.js your machine will have access to npm command, use the command below to update to latest version.
+
+    sudo npm install npm@latest -g
+    
+### Install the Angular CLI
+Install angular from npm repository, the -g flag is used to install angular **globally** in your machine.
+
+    sudo npm install -g @angular/cli  
+
+## Development server  
+
+Run `ng serve` or `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.  
 
 ## Build
 
@@ -22,6 +50,10 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+## Used Frameworks
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Angular 10
+
+  
+
+- Angular Material UI
