@@ -1,0 +1,11 @@
+.form_container{
+    padding-left:32px;
+}
+
+.pagination_container{
+    display: flex;
+    padding-left:32px;
+}
+.pagination_container > :first-child {
+    margin-right: 10px;
+}
