@@ -12,6 +12,7 @@ import { PeopleService } from 'src/app/services';
 })
 export class PeopleListComponent implements OnInit, OnDestroy {
 
+  paginationLoading = false;
   searchControl = new FormControl();
   searchLoading = false;
   searchedCharacters: SWAPIResponse<People>;
@@ -21,33 +22,35 @@ export class PeopleListComponent implements OnInit, OnDestroy {
   constructor(private peopleService: PeopleService) { }
 
   ngOnInit(): void {
-    this.getAllCharacters();
+    this.getAllCharacters(() => this.isLoading = false);
     this.setupSearch();
   }
 
   getNextCharacters() {
+    this.paginationLoading = true;
     if (this.characters?.next) {
       const page = this.characters?.next?.split('?page=')[1];
-      if (page) { this.getAllCharacters(page); }
+      if (page) { this.getAllCharacters(() => this.paginationLoading = false, page); }
     }
   }
 
   getPreviousCharacters() {
+    this.paginationLoading = true;
     if (this.characters?.previous) {
       const page = this.characters?.previous?.split('?page=')[1];
-      if (page) { this.getAllCharacters(page); }
+      if (page) { this.getAllCharacters(() => this.paginationLoading = false, page); }
     }
   }
 
 
-  private getAllCharacters(page?: number) {
+  private getAllCharacters(onEndCallback: () => void, page?: number) {
     this.peopleService.getAllCharacters(page)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(peoples => {
         this.characters = peoples;
-        this.isLoading = false;
+        onEndCallback();
       }, err => {
-        this.isLoading = false;
+        onEndCallback();
         console.error(err);
       });
   }

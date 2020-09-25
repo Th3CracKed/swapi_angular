@@ -12,6 +12,7 @@ import { PlanetService } from 'src/app/services';
 })
 export class PlanetsListComponent implements OnInit, OnDestroy {
 
+  paginationLoading = false;
   searchControl = new FormControl();
   searchLoading = false;
   searchedPlanets: SWAPIResponse<Planet>;
@@ -21,33 +22,34 @@ export class PlanetsListComponent implements OnInit, OnDestroy {
   constructor(private planetService: PlanetService) { }
 
   ngOnInit(): void {
-    this.getAllPlanets();
+    this.getAllPlanets(() => this.isLoading = false);
     this.setupSearch();
   }
 
   getNextPlanets() {
+    this.paginationLoading = true;
     if (this.planets?.next) {
       const page = this.planets?.next?.split('?page=')[1];
-      if (page) { this.getAllPlanets(page); }
+      if (page) { this.getAllPlanets(() => this.paginationLoading = false, page); }
     }
   }
 
   getPreviousPlanets() {
     if (this.planets?.previous) {
       const page = this.planets?.previous?.split('?page=')[1];
-      if (page) { this.getAllPlanets(page); }
+      if (page) { this.getAllPlanets(() => this.paginationLoading = false, page); }
     }
   }
 
 
-  private getAllPlanets(page?: number) {
+  private getAllPlanets(onEndCallback: () => void, page?: number) {
     this.planetService.getAllPlanets(page)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(planets => {
         this.planets = planets;
-        this.isLoading = false;
+        onEndCallback();
       }, err => {
-        this.isLoading = false;
+        onEndCallback();
         console.error(err);
       });
   }
