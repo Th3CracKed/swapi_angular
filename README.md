@@ -11,7 +11,7 @@ Normally, npm will be installed with Node.js , but it's recommended to get the l
 
 ### Node.js LTS Installation
 
-The installation of node.js differ from distribution to another. In this documentation I will cover the installation of Node.js on Ubuntu, you can find who to install Node.js in your distribution by simple google search or by directly visiting [this github repository](https://github.com/nodesource/distributions).
+The installation of node.js differ from distribution to another. In this documentation I will cover the installation of Node.js on Ubuntu, you can find how to install Node.js in your distribution by a simple google search or by directly visiting [this github repository](https://github.com/nodesource/distributions).
   
 
 Copy and paste theses commands in your terminal :
