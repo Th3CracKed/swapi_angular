@@ -12,3 +12,7 @@ tr > td:first-child {
 .resource{
     padding: 0px 50px 50px 0px;
 }
+
+.title{
+    padding-left: 32px;
+}
