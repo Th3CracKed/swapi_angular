@@ -14,7 +14,7 @@ import { VehiclesDetailComponent } from './components/vehicles-detail/vehicles-d
 import { StarshipsListComponent } from './components/starships-list/starships-list.component';
 import { StarshipsDetailComponent } from './components/starships-detail/starships-detail.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: ResourcesListComponent },
   {
     path: 'films',
