@@ -1,0 +1,73 @@
+<div *ngIf="!isLoading && planet">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ planet?.name}}</mat-card-title>
+            <mat-card-subtitle>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Rotation Period :</td>
+                            <td>{{ planet?.rotation_period}}</td>
+                        </tr>
+                        <tr>
+                            <td>Orbital Period :</td>
+                            <td>{{ planet?.orbital_period}}</td>
+                        </tr>
+                        <tr>
+                            <td>Diameter :</td>
+                            <td>{{ planet?.diameter}}</td>
+                        </tr>
+                        <tr>
+                            <td>Climate :</td>
+                            <td>{{ planet?.climate}}</td>
+                        </tr>
+                        <tr>
+                            <td>Gravity :</td>
+                            <td>{{ planet?.gravity}}</td>
+                        </tr>
+                        <tr>
+                            <td>Terrain :</td>
+                            <td>{{ planet?.terrain}}</td>
+                        </tr>
+                        <tr>
+                            <td>Surface Water :</td>
+                            <td>{{ planet?.surface_water}}</td>
+                        </tr>
+                        <tr>
+                            <td>Population :</td>
+                            <td>{{ planet?.population}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+</div>
+
+<ng-container *ngIf="planet?.residents?.length">
+    <h2 class="title">Residents :</h2>
+    <ul class="resources">
+        <li class="resource" *ngFor="let resident of planet?.residents">
+            <a mat-stroked-button *appVar="resident | extractIdFromUrl; let residentId"
+                [routerLink]="['/characters',residentId]">
+                Resident Nº {{residentId }}</a>
+        </li>
+    </ul>
+</ng-container>
+
+<ng-container *ngIf="planet?.films?.length">
+    <h2 class="title">Films :</h2>
+    <ul class="resources">
+        <li class="resource" *ngFor="let film of planet?.films">
+            <a mat-stroked-button *appVar="film | extractIdFromUrl; let filmId" [routerLink]="['/films',filmId]">
+                Film Nº {{filmId }}</a>
+        </li>
+    </ul>
+</ng-container>
+
+<!-- Loading Spinner -->
+<div class="loading_container" *ngIf="isLoading">
+    <mat-spinner diameter="256"></mat-spinner>
+</div>
+<!-- Error Message -->
+<div *ngIf="!isLoading && !planet">Error Occurred check your internet connection</div>

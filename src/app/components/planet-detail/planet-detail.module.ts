@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
-import { FilmDetailComponent } from './film-detail.component';
+import { PlanetDetailComponent } from './planet-detail.component';
 
 @NgModule({
     declarations: [
-        FilmDetailComponent
+        PlanetDetailComponent
     ],
     imports: [SharedModule],
     exports: [
-        FilmDetailComponent
+        PlanetDetailComponent
     ]
 })
-export class FilmDetailModule { }
+export class PlanetDetailModule { }
