@@ -31,12 +31,14 @@
         </mat-list-option>
     </mat-selection-list>
 </div>
-<button mat-raised-button *ngIf="planets?.previous" (click)="getPreviousPlanets()">
-    Previous <mat-icon>navigate_before</mat-icon>
-</button>
-<button mat-raised-button *ngIf="planets?.next" (click)="getNextPlanets()">
-    Next<mat-icon>navigate_next</mat-icon>
-</button>
+<ng-container *ngIf="planets?.previous || planets?.next">
+    <button mat-raised-button [disabled]="!planets?.previous" (click)="getPreviousPlanets()">
+        Previous <mat-icon>navigate_before</mat-icon>
+    </button>
+    <button mat-raised-button [disabled]="!planets?.next" (click)="getNextPlanets()">
+        Next<mat-icon>navigate_next</mat-icon>
+    </button>
+</ng-container>
 <!-- Loading Spinner -->
 <div class=" loading_container" *ngIf="isLoading">
     <mat-spinner diameter="256"></mat-spinner>
