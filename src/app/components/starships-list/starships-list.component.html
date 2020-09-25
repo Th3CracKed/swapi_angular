@@ -1,0 +1,48 @@
+<form class="form_container">
+    <mat-form-field>
+        <mat-label>Search by starships title</mat-label>
+        <mat-spinner *ngIf="searchLoading" matPrefix diameter="16"></mat-spinner>
+        <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="searchControl"
+            [matAutocomplete]="auto">
+        <button mat-button *ngIf="searchControl?.value" matSuffix mat-icon-button aria-label="Clear"
+            (click)="searchControl.reset()">
+            <mat-icon>close</mat-icon>
+        </button>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <ng-container *ngFor="let oneSearchedStarships of searchedStarships?.results">
+                <mat-option *appVar="oneSearchedStarships?.url | extractIdFromUrl; let starshipsId"
+                    [routerLink]="['.', starshipsId]">
+                    {{oneSearchedStarships?.name}}
+                </mat-option>
+            </ng-container>
+        </mat-autocomplete>
+        <mat-hint *ngIf="!searchedStarships?.results.length && !searchControl?.value">Make a Search</mat-hint>
+        <mat-hint *ngIf="!searchedStarships?.results.length && searchControl?.value">No Results Found
+        </mat-hint>
+    </mat-form-field>
+</form>
+
+
+<div *ngIf="!isLoading && starships">
+    <mat-selection-list #starshipsList [multiple]="false">
+        <mat-list-option *ngFor="let oneStarships of starships?.results">
+            <a mat-list-item *appVar="oneStarships?.url | extractIdFromUrl; let starshipsId"
+                [routerLink]="['.', starshipsId]"><span>{{oneStarships?.name}}</span> </a>
+        </mat-list-option>
+    </mat-selection-list>
+</div>
+<div class="pagination_container" *ngIf="starships?.previous || starships?.next">
+    <button mat-raised-button [disabled]="!starships?.previous" (click)="getPreviousStarships()">
+        Previous <mat-icon>navigate_before</mat-icon>
+    </button>
+    <button mat-raised-button [disabled]="!starships?.next" (click)="getNextStarships()">
+        Next<mat-icon>navigate_next</mat-icon>
+    </button>
+    <mat-spinner *ngIf="paginationLoading" matPrefix diameter="32"></mat-spinner>
+</div>
+<!-- Loading Spinner -->
+<div class=" loading_container" *ngIf="isLoading">
+    <mat-spinner diameter="256"></mat-spinner>
+</div>
+<!-- Error Message -->
+<div *ngIf="!isLoading && !starships">Error Occurred check your internet connection</div>
