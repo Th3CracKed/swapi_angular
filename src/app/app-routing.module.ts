@@ -5,6 +5,8 @@ import { FilmsListComponent } from './components/films-list/films-list.component
 import { FilmDetailComponent } from './components/film-detail/film-detail.component';
 import { PeopleListComponent } from './components/people-list/people-list.component';
 import { PeopleDetailComponent } from './components/people-detail/people-detail.component';
+import { PlanetsListComponent } from './components/planets-list/planets-list.component';
+import { PlanetDetailComponent } from './components/planet-detail/planet-detail.component';
 
 const routes: Routes = [
   { path: '', component: ResourcesListComponent },
@@ -17,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: ':id', component: FilmDetailComponent,
-        loadChildren: () => import('./components/film-detail/film-detail.module').then(m => m.FilmsDetailModule)
+        loadChildren: () => import('./components/film-detail/film-detail.module').then(m => m.FilmDetailModule)
       }
     ]
   },
@@ -31,6 +33,19 @@ const routes: Routes = [
       {
         path: ':id', component: PeopleDetailComponent,
         loadChildren: () => import('./components/people-detail/people-detail.module').then(m => m.PeopleDetailModule)
+      }
+    ]
+  },
+  {
+    path: 'planets',
+    children: [
+      {
+        path: '', component: PlanetsListComponent,
+        loadChildren: () => import('./components/planets-list/planets-list.module').then(m => m.PlanetListModule)
+      },
+      {
+        path: ':id', component: PlanetDetailComponent,
+        loadChildren: () => import('./components/planet-detail/planet-detail.module').then(m => m.PlanetDetailModule)
       }
     ]
   }

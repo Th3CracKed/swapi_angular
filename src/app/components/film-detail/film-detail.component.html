@@ -32,7 +32,7 @@
     <ul class="resources">
         <li class="resource" *ngFor="let character of film?.characters">
             <a mat-stroked-button *appVar="character | extractIdFromUrl; let characterId"
-                [routerLink]="['/people',characterId]">
+                [routerLink]="['/characters',characterId]">
                 Character Nº {{characterId }}</a>
         </li>
     </ul>

@@ -1,0 +1,47 @@
+<form class="form_container">
+    <mat-form-field>
+        <mat-label>Search by planet title</mat-label>
+        <mat-spinner *ngIf="searchLoading" matPrefix diameter="16"></mat-spinner>
+        <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="searchControl"
+            [matAutocomplete]="auto">
+        <button mat-button *ngIf="searchControl?.value" matSuffix mat-icon-button aria-label="Clear"
+            (click)="searchControl.reset()">
+            <mat-icon>close</mat-icon>
+        </button>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <ng-container *ngFor="let searchedPlanet of searchedPlanets?.results">
+                <mat-option *appVar="searchedPlanet?.url | extractIdFromUrl; let planetId"
+                    [routerLink]="['.', planetId]">
+                    {{searchedPlanet?.name}}
+                </mat-option>
+            </ng-container>
+        </mat-autocomplete>
+        <mat-hint *ngIf="!searchedPlanets?.results.length && !searchControl?.value">Make a Search</mat-hint>
+        <mat-hint *ngIf="!searchedPlanets?.results.length && searchControl?.value">No Results Found
+        </mat-hint>
+    </mat-form-field>
+</form>
+
+
+<div *ngIf="!isLoading && planets">
+    <mat-selection-list #planetsList [multiple]="false">
+        <mat-list-option *ngFor="let planet of planets?.results">
+            <a mat-list-item *appVar="planet?.url | extractIdFromUrl; let planetId"
+                [routerLink]="['.', planetId]"><span>{{planet?.name}}</span> </a>
+        </mat-list-option>
+    </mat-selection-list>
+</div>
+<ng-container *ngIf="planets?.previous || planets?.next">
+    <button mat-raised-button [disabled]="!planets?.previous" (click)="getPreviousPlanets()">
+        Previous <mat-icon>navigate_before</mat-icon>
+    </button>
+    <button mat-raised-button [disabled]="!planets?.next" (click)="getNextPlanets()">
+        Next<mat-icon>navigate_next</mat-icon>
+    </button>
+</ng-container>
+<!-- Loading Spinner -->
+<div class=" loading_container" *ngIf="isLoading">
+    <mat-spinner diameter="256"></mat-spinner>
+</div>
+<!-- Error Message -->
+<div *ngIf="!isLoading && !planets">Error Occurred check your internet connection</div>
