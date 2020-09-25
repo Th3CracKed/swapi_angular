@@ -3,3 +3,4 @@ export * from './people.service';
 export * from './planet.service';
 export * from './species.service';
 export * from './vehicles.service';
+export * from './starships.service';

@@ -1,0 +1,88 @@
+<div *ngIf="!isLoading && starships">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ starships?.name}}</mat-card-title>
+            <mat-card-subtitle>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Model :</td>
+                            <td>{{ starships?.model}}</td>
+                        </tr>
+                        <tr>
+                            <td>Manufacturer :</td>
+                            <td>{{ starships?.manufacturer}}</td>
+                        </tr>
+                        <tr>
+                            <td>Cost in Credits :</td>
+                            <td>{{ starships?.cost_in_credits}}</td>
+                        </tr>
+                        <tr>
+                            <td>Length :</td>
+                            <td>{{ starships?.length}}</td>
+                        </tr>
+                        <tr>
+                            <td>Max atmosphering speed :</td>
+                            <td>{{ starships?.max_atmosphering_speed}}</td>
+                        </tr>
+                        <tr>
+                            <td>Crew :</td>
+                            <td>{{ starships?.crew}}</td>
+                        </tr>
+                        <tr>
+                            <td>Passengers :</td>
+                            <td>{{ starships?.passengers}}</td>
+                        </tr>
+                        <tr>
+                            <td>Cargo capacity :</td>
+                            <td>{{ starships?.cargo_capacity}}</td>
+                        </tr>
+                        <tr>
+                            <td>Consumables :</td>
+                            <td>{{ starships?.consumables}}</td>
+                        </tr>
+                        <tr>
+                            <td>Hyperdrive rating :</td>
+                            <td>{{ starships?.hyperdrive_rating}}</td>
+                        </tr>
+                        <tr>
+                            <td>MGLT :</td>
+                            <td>{{ starships?.MGLT}}</td>
+                        </tr>
+                        <tr>
+                            <td>Starship class :</td>
+                            <td>{{ starships?.starship_class}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+</div>
+
+<ng-container *ngIf="starships?.pilots?.length">
+    <h2 class="title">Pilots :</h2>
+    <ul class="resources">
+        <li class="resource" *ngFor="let pilots of starships?.pilots">
+            <a mat-stroked-button *appVar="pilots | extractIdFromUrl; let pilotsId"
+                [routerLink]="['/characters',pilotsId]">
+                Pilots Nº {{pilotsId }}</a>
+        </li>
+    </ul>
+</ng-container>
+<ng-container *ngIf="starships?.films?.length">
+    <h2 class="title">Films :</h2>
+    <ul class="resources">
+        <li class="resource" *ngFor="let film of starships?.films">
+            <a mat-stroked-button *appVar="film | extractIdFromUrl; let filmId" [routerLink]="['/films',filmId]">
+                Film Nº {{filmId }}</a>
+        </li>
+    </ul>
+</ng-container>
+
+<!-- Loading Spinner -->
+<div class="loading_container" *ngIf="isLoading">
+    <mat-spinner diameter="256"></mat-spinner>
+</div>
+<!-- Error Message -->
+<div *ngIf="!isLoading && !starships">Error Occurred check your internet connection</div>

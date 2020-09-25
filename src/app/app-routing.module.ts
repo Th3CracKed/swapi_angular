@@ -11,6 +11,8 @@ import { SpeciesDetailComponent } from './components/species-detail/species-deta
 import { SpeciesListComponent } from './components/species-list/species-list.component';
 import { VehiclesListComponent } from './components/vehicles-list/vehicles-list.component';
 import { VehiclesDetailComponent } from './components/vehicles-detail/vehicles-detail.component';
+import { StarshipsListComponent } from './components/starships-list/starships-list.component';
+import { StarshipsDetailComponent } from './components/starships-detail/starships-detail.component';
 
 const routes: Routes = [
   { path: '', component: ResourcesListComponent },
@@ -76,6 +78,19 @@ const routes: Routes = [
       {
         path: ':id', component: VehiclesDetailComponent,
         loadChildren: () => import('./components/vehicles-detail/vehicles-detail.module').then(m => m.VehiclesDetailModule)
+      }
+    ]
+  },
+  {
+    path: 'starships',
+    children: [
+      {
+        path: '', component: StarshipsListComponent,
+        loadChildren: () => import('./components/starships-list/starships-list.module').then(m => m.StarshipsListModule)
+      },
+      {
+        path: ':id', component: StarshipsDetailComponent,
+        loadChildren: () => import('./components/starships-detail/starships-detail.module').then(m => m.StarshipsDetailModule)
       }
     ]
   }
