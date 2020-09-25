@@ -31,7 +31,8 @@
     <h2 class="title">Characters :</h2>
     <ul class="resources">
         <li class="resource" *ngFor="let character of film?.characters">
-            <a *appVar="character | extractIdFromUrl; let characterId" [routerLink]="['/people',characterId]">
+            <a mat-stroked-button *appVar="character | extractIdFromUrl; let characterId"
+                [routerLink]="['/people',characterId]">
                 Character Nº {{characterId }}</a>
         </li>
     </ul>
@@ -40,7 +41,8 @@
     <h2 class="title">Planets :</h2>
     <ul class="resources">
         <li class="resource" *ngFor="let planet of film?.planets">
-            <a *appVar="planet | extractIdFromUrl; let planetId" [routerLink]="['/planets',planetId]">
+            <a mat-stroked-button *appVar="planet | extractIdFromUrl; let planetId"
+                [routerLink]="['/planets',planetId]">
                 Planet Nº {{planetId }}</a>
         </li>
     </ul>
@@ -49,7 +51,8 @@
     <h2 class="title">Starships :</h2>
     <ul class="resources">
         <li class="resource" *ngFor="let starship of film?.starships">
-            <a *appVar="starship | extractIdFromUrl; let starshipId" [routerLink]="['/starships',starshipId]">
+            <a mat-stroked-button *appVar="starship | extractIdFromUrl; let starshipId"
+                [routerLink]="['/starships',starshipId]">
                 Starship Nº {{starshipId }}</a>
         </li>
     </ul>
@@ -58,7 +61,8 @@
     <h2 class="title">Vehicles :</h2>
     <ul class="resources">
         <li class="resource" *ngFor="let vehicle of film?.vehicles">
-            <a *appVar="vehicle | extractIdFromUrl; let vehicleId" [routerLink]="['/vehicles',vehicleId]">
+            <a mat-stroked-button *appVar="vehicle | extractIdFromUrl; let vehicleId"
+                [routerLink]="['/vehicles',vehicleId]">
                 Vehicle Nº {{vehicleId }}</a>
         </li>
     </ul>
@@ -67,7 +71,8 @@
     <h2 class="title">Species :</h2>
     <ul class="resources">
         <li class="resource" *ngFor="let specie of film?.species">
-            <a *appVar="specie | extractIdFromUrl; let specieId" [routerLink]="['/species',specieId]">
+            <a mat-stroked-button *appVar="specie | extractIdFromUrl; let specieId"
+                [routerLink]="['/species',specieId]">
                 Specie Nº {{specieId }}</a>
         </li>
     </ul>
