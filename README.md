@@ -50,6 +50,13 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
+## Features
+
+ **Optimized search bar :** The search bar is enhanced to send a request only when user stopped typing for 0.2 seconds which help reduce the number of requests by a lot, but still give a good user experience.
+ The request are sent only when a new data is typed (if the user stop typing and the input text has the same value as previous request the request is not sent to the API )  
+**Http Pagination :** SWAPI support pagination via http which this project support.
+**Reuse old state :** The detail pages reuse the request from list resources, if user navigated from it.
+
 ## Used Frameworks
 
 - Angular 10
